@@ -211,4 +211,14 @@ document.addEventListener('DOMContentLoaded', () => {
         </small>
     `;
     document.querySelector('.container').appendChild(hints);
+    
+    // Fix for iOS Safari scrolling issues
+    document.addEventListener('touchstart', {});
+    
+    // Disable pull-to-refresh on mobile
+    document.body.addEventListener('touchmove', function(e) {
+        if (window.innerHeight >= document.body.scrollHeight) {
+            e.preventDefault();
+        }
+    }, { passive: false });
 });

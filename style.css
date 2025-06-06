@@ -19,22 +19,23 @@ input, textarea {
     user-select: text;
 }
 
+html {
+    height: 100%;
+    overflow-y: scroll;
+}
+
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1a0b0b 0%, #4a0e0e 25%, #8b1538 75%, #d32f2f 100%);
-    min-height: 100vh;
-    min-height: 100dvh; /* Modern viewport units for mobile */
-    min-height: -webkit-fill-available; /* iOS Safari fix */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    background-attachment: fixed;
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
     color: #fff;
-    overflow-x: hidden; /* Only prevent horizontal scroll */
-    overflow-y: auto; /* Allow vertical scroll */
+    overflow-x: hidden;
     position: relative;
-    touch-action: auto; /* Allow all touch actions including scroll */
-    padding: 1rem 0.5rem;
+    touch-action: manipulation;
     -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
 }
 
@@ -45,16 +46,14 @@ body {
     }
 }
 
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(255, 82, 82, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(244, 67, 54, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+.outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    box-sizing: border-box;
 }
 
 .container {
@@ -73,6 +72,7 @@ body::before {
     width: calc(100% - 1rem);
     position: relative;
     overflow: hidden;
+    margin: 1rem auto;
 }
 
 .container::before {
@@ -393,6 +393,10 @@ h1 {
         padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); /* Respect home indicator */
     }
     
+    .outer-container {
+        padding: 0.5rem;
+    }
+    
     .container {
         padding: 2rem 1.5rem;
         margin: 0.5rem 0; /* Add vertical margin for scrolling */
@@ -456,6 +460,10 @@ h1 {
         padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
     }
     
+    .outer-container {
+        padding: 0.25rem;
+    }
+    
     .container {
         padding: 1.5rem 1rem;
         margin: 0.25rem 0;
@@ -517,6 +525,10 @@ h1 {
         align-items: flex-start;
     }
     
+    .outer-container {
+        padding: 0.125rem;
+    }
+    
     .container {
         padding: 1.25rem 0.75rem;
         margin: 0.125rem 0;
@@ -534,5 +546,12 @@ h1 {
     .btn {
         padding: 1rem 1.25rem;
         font-size: 0.95rem;
+    }
+}
+
+/* Hide keyboard hints on small screens */
+@media (max-width: 480px) {
+    .keyboard-hints {
+        display: none;
     }
 }
