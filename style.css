@@ -1,0 +1,444 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a0b0b 0%, #4a0e0e 25%, #8b1538 75%, #d32f2f 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(255, 82, 82, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(244, 67, 54, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.container {
+    background: linear-gradient(145deg, rgba(26, 11, 11, 0.9), rgba(139, 21, 56, 0.8));
+    border-radius: 24px;
+    padding: 3.5rem;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(244, 67, 54, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    text-align: center;
+    min-width: 450px;
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(244, 67, 54, 0.1) 50%, transparent 70%);
+    pointer-events: none;
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ff5252, #f44336, #d32f2f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+}
+
+.time-input-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.time-input-section label {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#startTimeInput {
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(255, 23, 68, 0.4);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    text-align: center;
+    width: 80px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+#startTimeInput:focus {
+    outline: none;
+    border-color: rgba(255, 23, 68, 0.8);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(255, 23, 68, 0.3);
+}
+
+#startTimeInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-set {
+    background: linear-gradient(135deg, #ff1744, #d32f2f, #b71c1c);
+    color: white;
+    border: 1px solid rgba(255, 23, 68, 0.5);
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+}
+
+.timer-display {
+    font-size: 7rem;
+    font-weight: 900;
+    color: #ff1744;
+    text-shadow: 
+        0 0 20px rgba(255, 23, 68, 0.8),
+        0 0 40px rgba(255, 23, 68, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.5);
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: linear-gradient(145deg, rgba(255, 23, 68, 0.1), rgba(244, 67, 54, 0.05));
+    border-radius: 20px;
+    border: 2px solid rgba(255, 23, 68, 0.4);
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+}
+
+.timer-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.timer-display.warning {
+    color: #ff9800;
+    background: linear-gradient(145deg, rgba(255, 152, 0, 0.2), rgba(255, 152, 0, 0.1));
+    border-color: rgba(255, 152, 0, 0.6);
+    text-shadow: 
+        0 0 20px rgba(255, 152, 0, 0.9),
+        0 0 40px rgba(255, 152, 0, 0.5),
+        0 8px 16px rgba(0, 0, 0, 0.5);
+    animation: pulse-warning 1s ease-in-out infinite;
+}
+
+.timer-display.danger {
+    color: #ff1744;
+    background: linear-gradient(145deg, rgba(255, 23, 68, 0.3), rgba(255, 23, 68, 0.15));
+    border-color: rgba(255, 23, 68, 0.8);
+    text-shadow: 
+        0 0 30px rgba(255, 23, 68, 1),
+        0 0 60px rgba(255, 23, 68, 0.6),
+        0 8px 16px rgba(0, 0, 0, 0.6);
+    animation: pulse-danger 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 152, 0, 0.4);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 0 40px rgba(255, 152, 0, 0.6);
+    }
+}
+
+@keyframes pulse-danger {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(255, 23, 68, 0.6);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 60px rgba(255, 23, 68, 0.8);
+    }
+}
+
+.controls {
+    margin: 2rem 0;
+}
+
+.main-controls {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.time-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 100px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff1744, #d32f2f, #b71c1c);
+    color: white;
+    border: 1px solid rgba(255, 23, 68, 0.5);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ff5252, #ff1744, #d32f2f);
+    box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #ff5722, #e64a19, #d84315);
+    color: white;
+    border: 1px solid rgba(255, 87, 34, 0.5);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #ff6f47, #ff5722, #e64a19);
+    box-shadow: 0 8px 25px rgba(255, 87, 34, 0.4);
+}
+
+.btn-tertiary {
+    background: linear-gradient(135deg, #424242, #616161, #757575);
+    color: white;
+    border: 1px solid rgba(117, 117, 117, 0.5);
+}
+
+.btn-tertiary:hover {
+    background: linear-gradient(135deg, #616161, #757575, #9e9e9e);
+    box-shadow: 0 8px 25px rgba(117, 117, 117, 0.4);
+}
+
+.btn-adjust {
+    background: linear-gradient(135deg, #c62828, #ad2323, #8e1e1e);
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(198, 40, 40, 0.5);
+}
+
+.btn-adjust:hover {
+    background: linear-gradient(135deg, #e53935, #c62828, #ad2323);
+    box-shadow: 0 8px 25px rgba(198, 40, 40, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    background: linear-gradient(135deg, #424242, #616161) !important;
+    box-shadow: none !important;
+}
+
+.status {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #b0bec5;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.status.running {
+    color: #4caf50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.status.stopped {
+    color: #ff5722;
+    text-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+
+.status.finished {
+    color: #ff1744;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-shadow: 0 0 20px rgba(255, 23, 68, 0.8);
+    animation: blink-modern 1s infinite;
+}
+
+@keyframes blink-modern {
+    0%, 50% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    51%, 100% { 
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 2.5rem;
+        margin: 1rem;
+        min-width: 350px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .time-input-section {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .time-input-section label {
+        font-size: 1rem;
+    }
+    
+    #startTimeInput {
+        width: 100px;
+        font-size: 1rem;
+    }
+    
+    .timer-display {
+        font-size: 5rem;
+        padding: 1.5rem;
+    }
+    
+    .main-controls, .time-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 1.2rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem;
+        margin: 0.5rem;
+        min-width: 300px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .time-input-section {
+        margin-bottom: 1.2rem;
+    }
+    
+    .time-input-section label {
+        font-size: 0.9rem;
+    }
+    
+    #startTimeInput {
+        width: 80px;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .btn-set {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .timer-display {
+        font-size: 4rem;
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+    }
+    
+    .btn {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+        max-width: 200px;
+    }
+    
+    .status {
+        font-size: 1rem;
+    }
+}

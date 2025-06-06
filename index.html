@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Slimste Mens Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>De Slimste Mens Timer</h1>
+        
+        <div class="time-input-section">
+            <label for="startTimeInput">Starting Time (seconds):</label>
+            <input type="number" id="startTimeInput" min="1" max="999" value="60" />
+            <button id="setTimeBtn" class="btn btn-set">Set Time</button>
+        </div>
+        
+        <div class="timer-display" id="timerDisplay">
+            60
+        </div>
+        
+        <div class="controls">
+            <div class="main-controls">
+                <button id="startBtn" class="btn btn-primary">Start</button>
+                <button id="stopBtn" class="btn btn-secondary">Stop</button>
+                <button id="resetBtn" class="btn btn-tertiary">Reset</button>
+            </div>
+            
+            <div class="time-controls">
+                <button id="decreaseBtn" class="btn btn-adjust">-10s</button>
+                <button id="increaseBtn" class="btn btn-adjust">+10s</button>
+            </div>
+        </div>
+        
+        <div class="status" id="status">
+            Ready to start
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
