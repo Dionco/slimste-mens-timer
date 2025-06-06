@@ -26,13 +26,16 @@ body {
     min-height: 100dvh; /* Modern viewport units for mobile */
     min-height: -webkit-fill-available; /* iOS Safari fix */
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     color: #fff;
-    overflow: hidden;
+    overflow-x: hidden; /* Only prevent horizontal scroll */
+    overflow-y: auto; /* Allow vertical scroll */
     position: relative;
-    touch-action: manipulation;
-    padding: 0.5rem;
+    touch-action: auto; /* Allow all touch actions including scroll */
+    padding: 1rem 0.5rem;
+    -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
 }
 
 /* iOS Safari viewport fix */
@@ -385,14 +388,18 @@ h1 {
 @media (max-width: 768px) {
     body {
         padding: 0.25rem;
+        align-items: flex-start; /* Allow content to start at top */
+        padding-top: max(0.5rem, env(safe-area-inset-top)); /* Respect notch */
+        padding-bottom: max(0.5rem, env(safe-area-inset-bottom)); /* Respect home indicator */
     }
     
     .container {
         padding: 2rem 1.5rem;
-        margin: 0;
+        margin: 0.5rem 0; /* Add vertical margin for scrolling */
         min-width: 320px;
         width: 100%;
         border-radius: 16px;
+        max-width: none; /* Remove max-width restriction */
     }
     
     h1 {
@@ -442,9 +449,16 @@ h1 {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 0.25rem;
+        align-items: flex-start;
+        padding-top: max(0.25rem, env(safe-area-inset-top));
+        padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+    }
+    
     .container {
         padding: 1.5rem 1rem;
-        margin: 0;
+        margin: 0.25rem 0;
         min-width: 280px;
         border-radius: 12px;
     }
@@ -498,8 +512,14 @@ h1 {
 
 /* Extra small screens */
 @media (max-width: 360px) {
+    body {
+        padding: 0.125rem;
+        align-items: flex-start;
+    }
+    
     .container {
         padding: 1.25rem 0.75rem;
+        margin: 0.125rem 0;
     }
     
     h1 {
