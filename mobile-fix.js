@@ -1,23 +1,17 @@
-// Apply this script to fix scrolling issues on mobile devices
-// This script ensures content will scroll properly on iOS Safari and other mobile browsers
-
+// Mobile fixes for De Slimste Mens Timer
 document.addEventListener('DOMContentLoaded', function() {
-    // Force document to be scrollable
-    document.documentElement.style.height = 'initial';
-    document.body.style.height = 'initial';
-    document.documentElement.style.position = 'static';
-    document.body.style.position = 'static';
-    
-    // Handle viewport height issues on mobile
+    // Function to set correct viewport height for mobile
     function setViewportHeight() {
-        const vh = window.innerHeight * 0.01;
+        // First we get the viewport height and multiply it by 1% to get a value for a vh unit
+        let vh = window.innerHeight * 0.01;
+        // Then we set the value in the --vh custom property to the root of the document
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
     
-    // Set initial viewport height
+    // Set the viewport height initially
     setViewportHeight();
     
-    // Update on resize and orientation change
+    // Resize event handler
     window.addEventListener('resize', setViewportHeight);
     window.addEventListener('orientationchange', setViewportHeight);
 

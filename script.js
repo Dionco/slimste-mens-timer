@@ -69,6 +69,11 @@ class CountdownTimer {
         this.updateDisplay();
         this.updateStatus('Ready to start', '');
         this.updateButtons();
+        
+        // Stop music if it's playing
+        if (window.musicPlayer) {
+            window.musicPlayer.stop();
+        }
     }
     
     setCustomTime() {
@@ -112,8 +117,15 @@ class CountdownTimer {
         this.updateStatus('Time\'s up!', 'finished');
         this.updateButtons();
         
-        // Play a sound effect (if browser supports it)
-        this.playFinishSound();
+        // Play Jan Smit song
+        if (window.musicPlayer) {
+            window.musicPlayer.play();
+        }
+        
+        // Trigger explosion effect
+        if (window.explosionEffect) {
+            window.explosionEffect.trigger();
+        }
     }
     
     updateDisplay() {
